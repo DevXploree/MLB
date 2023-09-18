@@ -1,0 +1,525 @@
+{% extends "base.html" %} {% load static %} {% block style %}
+<link rel="stylesheet" href="{% static 'css/stats.css' %}" />
+{% endblock %} {% block content %}
+
+<main id="main">
+  <div class="search">
+    <input type="text" class="search-bar" placeholder="Search" />
+    <button class="searchbtn">
+      <img src="{% static 'assets/search.png' %}" alt="" />
+    </button>
+  </div>
+
+  <!-- {% for stats in all_stats %}
+    <ul>{{stats.strikeouts}}</ul>
+  {% endfor %} -->
+
+  <div class="parent-stat-box">
+    <div class="left-stat">
+      <div class="head">
+        <div class="small-box">
+          <img class="imglogo" src="{% static 'assets/logomlp.png' %}" />
+          <p>MLB</p>
+        </div>
+        <div class="small-box">
+          <small>2023 Season</small>
+        </div>
+      </div>
+      <div class="body">
+        <div class="top-line">
+          <ul>
+            <li>
+              <h2>Matches</h2>
+            </li>
+            <li id="current-month"><small>July 2023</small></li>
+            <li>
+              <button id="next" onclick="date_game_data_onclick(this)"></button>
+            </li>
+            <li>
+              <button
+                id="next-next"
+                onclick="date_game_data_onclick(this)"
+              ></button>
+            </li>
+            <li>
+              <button
+                id="next-next-next"
+                onclick="date_game_data_onclick(this)"
+              ></button>
+            </li>
+            <li>
+              <button
+                id="next-next-next-next"
+                onclick="date_game_data_onclick(this)"
+              ></button>
+            </li>
+            <div class="calendar-icon">
+              <input
+                type="date"
+                name=""
+                id="calendar"
+                class="datepicker-input"
+                onchange="date_game_data_onclick(this)"
+              />
+              <!-- Use Unicode for the calendar icon instead of <i> tag -->
+              &#128197;
+            </div>
+          </ul>
+          <div class="separator"></div>
+        </div>
+        <div class="matches" id="matches">
+          {% for data in context_arr %}
+          <form action="" method="get">
+            {% csrf_token %}
+            <button data-date="{{data.date}}" class="click-me">
+              <ul>
+                <input
+                  type="text"
+                  value="{{ data.date }}"
+                  readonly
+                  name="date"
+                  hidden
+                />
+                <input
+                  type="text"
+                  value="{{ data.team1 }}"
+                  readonly
+                  name="team1"
+                  hidden
+                />
+                <input
+                  type="text"
+                  value="{{ data.score1 }}"
+                  readonly
+                  name="score1"
+                  hidden
+                />
+                <input
+                  type="text"
+                  value="{{ data.team2 }}"
+                  readonly
+                  name="team2"
+                  hidden
+                />
+                <input
+                  type="text"
+                  value="{{ data.score2 }}"
+                  readonly
+                  name="score2"
+                  hidden
+                />
+                <li>{{data.date}}</li>
+                <li>{{data.team1}}</li>
+                <li>{{data.score1}}</li>
+                <li>{{data.team2}}</li>
+                <li>{{data.score2}}</li>
+                <li>🌟</li>
+              </ul>
+            </button>
+          </form>
+          <div class="separator" data-date="{{data.date}}"></div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    <div class="right-stat">
+      <div class="head">
+        <ul class="right-head-ul">
+          <li>
+            <button
+              id="matchup-button"
+              class="selected"
+              onclick="showMatchup()"
+            >
+              Matchup
+            </button>
+          </li>
+          <li><button id="selected" onclick="showStats()">Stats</button></li>
+          <li><button>Odds</button></li>
+          <li><button onclick="showPredict()">Predict</button></li>
+        </ul>
+      </div>
+
+      <div class="right-body">
+        <div class="body-left">
+          <div class="logo-title">
+            <img src="{% static 'assets/losangeles.png' %}" alt="" />
+            <h2>Los Angeles Angels</h2>
+          </div>
+          <div class="stats">
+            <h2>Matches Played: <span>140</span></h2>
+            <div class="score">
+              <ul>
+                <li>
+                  <h2>Victory:</h2>
+                  <span
+                    ><span class="score-point-win">7</span>
+                    <span class="score-point-win">0</span></span
+                  >
+                </li>
+                <li>
+                  <h2>Defeated:</h2>
+                  <span>
+                    <span class="score-point-lost">7</span>
+                    <span class="score-point-lost">0</span></span
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="body-right">
+          <div class="logo-title">
+            <img src="{% static 'assets/detroit.png' %}" alt="" />
+            <h2>Detroit Tigers</h2>
+          </div>
+          <div class="stats">
+            <h2>Matches Played: <span>140</span></h2>
+            <div class="score">
+              <ul>
+                <li>
+                  <h2>Victory:</h2>
+                  <span
+                    ><span class="score-point-win">7</span>
+                    <span class="score-point-win">0</span></span
+                  >
+                </li>
+                <li>
+                  <h2>Defeated:</h2>
+                  <span>
+                    <span class="score-point-lost">7</span>
+                    <span class="score-point-lost">0</span></span
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <!-- ... your existing content ... -->
+      </div>
+
+      <div class="results">
+        <ul>
+          <li>
+            30th July <br />
+            7:00 PM
+          </li>
+          <li>Los Angeles Angels <span>3</span></li>
+          <li>Detroit Tigers <span>1</span></li>
+          <li style="color: #0ab635">LA WON</li>
+        </ul>
+        <ul>
+          <li>
+            30th July <br />
+            7:00 PM
+          </li>
+          <li>Los Angeles Angels <span>3</span></li>
+          <li>Detroit Tigers <span>1</span></li>
+          <li style="color: #0ab635">LA WON</li>
+        </ul>
+        <ul>
+          <li>
+            30th July <br />
+            7:00 PM
+          </li>
+          <li>Los Angeles Angels <span>3</span></li>
+          <li>Detroit Tigers <span>1</span></li>
+          <li style="color: #0ab635">LA WON</li>
+        </ul>
+      </div>
+
+      <!-- Stats  -->
+      <div class="stats-content" id="stats-content">
+        <div class="header-stat">
+          <h3>Stats</h3>
+          <h3>{{team1.team_name}}</h3>
+          <h3>{{team2.team_name}}</h3>
+        </div>
+        <div class="detail-stat">
+          <h5>#Bat</h5>
+          <h5>{{team1.batters_used}}</h5>
+          <h5>{{team2.batters_used}}</h5>
+        </div>
+        <div class="detail-stat">
+          <h5>BatAge</h5>
+          <h5>{{team1.batting_age}}</h5>
+          <h5>{{team2.batting_age}}</h5>
+        </div>
+        <div class="detail-stat">
+          <h5>R/G</h5>
+          <h5>{{team1.runs_per_game}}</h5>
+          <h5>{{team2.runs_per_game}}</h5>
+        </div>
+        <div class="detail-stat">
+          <h5>G</h5>
+          <h5>{{team1.game_played}}</h5>
+          <h5>{{team2.game_played}}</h5>
+        </div>
+        <div class="detail-stat">
+          <h5>PA</h5>
+          <h5>{{team1.plate_appearances}}</h5>
+          <h5>{{team2.plate_appearances}}</h5>
+        </div>
+        <div class="detail-stat">
+          <h5>AB</h5>
+          <h5>{{team1.at_bats}}</h5>
+          <h5>{{team2.at_bats}}</h5>
+        </div>
+        <div class="detail-stat">
+          <h5>H</h5>
+          <h5>{{team1.hits}}</h5>
+          <h5>{{team2.hits}}</h5>
+        </div>
+        <div class="detail-stat">
+          <h5>2B</h5>
+          <h5>{{team1.doubles}}</h5>
+          <h5>{{team2.doubles}}</h5>
+        </div>
+        <div class="detail-stat">
+          <h5>3B</h5>
+          <h5>{{team1.triples}}</h5>
+          <h5>{{team2.triples}}</h5>
+        </div>
+        <div class="detail-stat">
+          <h5>HR</h5>
+          <h5>{{team1.home_runs}}</h5>
+          <h5>{{team2.home_runs}}</h5>
+        </div>
+        <div class="detail-stat">
+          <h5>RBI</h5>
+          <h5>{{team1.rbis}}</h5>
+          <h5>{{team2.rbis}}</h5>
+        </div>
+        <div class="detail-stat">
+          <h5>SB</h5>
+          <h5>{{team1.stolen_bases}}</h5>
+          <h5>{{team2.stolen_bases}}</h5>
+        </div>
+        <div class="detail-stat">
+          <h5>CS</h5>
+          <h5>{{team1.caught_stealing}}</h5>
+          <h5>{{team2.caught_stealing}}</h5>
+        </div>
+        <div class="detail-stat">
+          <h5>BB</h5>
+          <h5>{{team1.bases_on_balls}}</h5>
+          <h5>{{team2.bases_on_balls}}</h5>
+        </div>
+        <div class="detail-stat">
+          <h5>SO</h5>
+          <h5>{{team1.strikeouts}}</h5>
+          <h5>{{team2.strikeouts}}</h5>
+        </div>
+        <div class="detail-stat">
+          <h5>BA</h5>
+          <h5>{{team1.batting_avg}}</h5>
+          <h5>{{team2.batting_avg}}</h5>
+        </div>
+        <div class="detail-stat">
+          <h5>OBP</h5>
+          <h5>{{team1.onbase_perc}}</h5>
+          <h5>{{team2.onbase_perc}}</h5>
+        </div>
+        <div class="detail-stat">
+          <h5>SLG</h5>
+          <h5>{{team1.slugging_perc}}</h5>
+          <h5>{{team2.slugging_perc}}</h5>
+        </div>
+        <div class="detail-stat">
+          <h5>OPS</h5>
+          <h5>{{team1.ops}}</h5>
+          <h5>{{team2.ops}}</h5>
+        </div>
+        <div class="detail-stat">
+          <h5>OPS+</h5>
+          <h5>{{team1.ops_plus}}</h5>
+          <h5>{{team2.ops_plus}}</h5>
+        </div>
+        <div class="detail-stat">
+          <h5>TB</h5>
+          <h5>{{team1.total_bases}}</h5>
+          <h5>{{team2.total_bases}}</h5>
+        </div>
+        <div class="detail-stat">
+          <h5>GDP</h5>
+          <h5>{{team1.double_plays}}</h5>
+          <h5>{{team2.double_plays}}</h5>
+        </div>
+        <div class="detail-stat">
+          <h5>HBP</h5>
+          <h5>{{team1.hit_by_pitch}}</h5>
+          <h5>{{team2.hit_by_pitch}}</h5>
+        </div>
+        <div class="detail-stat">
+          <h5>SH</h5>
+          <h5>{{team1.sac_hits}}</h5>
+          <h5>{{team2.sac_hits}}</h5>
+        </div>
+        <div class="detail-stat">
+          <h5>SF</h5>
+          <h5>{{team1.sac_flies}}</h5>
+          <h5>{{team2.sac_flies}}</h5>
+        </div>
+        <div class="detail-stat">
+          <h5>IBB</h5>
+          <h5>{{team1.intentional_bb}}</h5>
+          <h5>{{team2.intentional_bb}}</h5>
+        </div>
+        <div class="detail-stat">
+          <h5>LOB</h5>
+          <h5>{{team1.left_on_base}}</h5>
+          <h5>{{team2.left_on_base}}</h5>
+        </div>
+      </div>
+
+      <div class="predict" id="predict">
+        <div class="top-logo">
+          <div class="logo-title">
+            <h2 id="team1h1">{{team1.team_name}}</h2>
+          </div>
+          <div class="logo-title">
+            <h2 id="team2h1">{{team2.team_name}}</h2>
+          </div>
+        </div>
+        <form action="/save-user-prediction/" method="post">
+          {% csrf_token %}
+          <div class="predict-body">
+            <input type="hidden" name="team1" value="{{team1.team_name}}">
+            <input type="hidden" name="team2" value="{{team2.team_name}}">
+            <div class="left-predict">
+              <div class="spin box-predict">
+                <h3 class="predict-title">General Parameters</h3>
+                <label for="rdLeft">RD</label>
+                <div class="input-predict">
+                  <input type="range" name="rdLeft" id="rdLeft" />
+                  <p>215</p>
+                </div>
+                <label for="eraLeft">ERA</label>
+                <div class="input-predict">
+                  <input type="range" name="eraLeft" id="eraLeft" />
+                  <p>215</p>
+                </div>
+                <h3 class="predict-title">Special Parameters</h3>
+                <label for="fipLeft">FIP</label>
+                <div class="input-predict">
+                  <input type="range" name="fipLeft" id="fipLeft" />
+                  <p>215</p>
+                </div>
+              </div>
+              <div class="spin box-predict">
+                <h3 class="predict-title">Seam Orientation</h3>
+                <label for="lobLeft">LOB</label>
+                <div class="input-predict">
+                  <input type="range" name="lobLeft" id="lobLeft" />
+                  <p>215</p>
+                </div>
+                <label for="whipLeft">WHIP</label>
+                <div class="input-predict">
+                  <input type="range" name="whipLeft" id="whipLeft" />
+                  <p>215</p>
+                </div>
+                <label for="obpLeft">OBP</label>
+                <div class="input-predict">
+                  <input type="range" name="obpLeft" id="obpLeft" />
+                  <p>215</p>
+                </div>
+                <h3 class="predict-title">Velocity</h3>
+                <label for="slgLeft">SLG</label>
+                <div class="input-predict">
+                  <input type="range" name="slgLeft" id="slgLeft" />
+                  <p>215</p>
+                </div>
+                <h3 class="predict-title">Total Spin</h3>
+                <label for="baLeft">BA</label>
+                <div class="input-predict">
+                  <input type="range" name="baLeft" id="baLeft" />
+                  <p>215</p>
+                </div>
+                <h3 class="predict-title">Percentage</h3>
+                <label for="percentageLeft">0</label>
+                <div class="input-predict">
+                  <input
+                    type="range"
+                    name="percentageLeft"
+                    id="percentageLeft"
+                  />
+                  <p>215</p>
+                </div>
+              </div>
+            </div>
+            <div class="right-predict">
+              <!-- Second one from starting row -->
+              <div class="spin box-predict">
+                <h3 class="predict-title">General Parameters</h3>
+                <label for="rdRight">RD</label>
+                <div class="input-predict">
+                  <input type="range" name="rdRight" id="rdRight" />
+                  <p>215</p>
+                </div>
+                <label for="eraRight">ERA</label>
+                <div class="input-predict">
+                  <input type="range" name="eraRight" id="eraRight" />
+                  <p>215</p>
+                </div>
+                <h3 class="predict-title">Special Parameters</h3>
+                <label for="fipRight">FIP</label>
+                <div class="input-predict">
+                  <input type="range" name="fipRight" id="fipRight" />
+                  <p>215</p>
+                </div>
+              </div>
+              <div class="spin box-predict">
+                <h3 class="predict-title">Seam Orientation</h3>
+                <label for="lobRight">LOB</label>
+                <div class="input-predict">
+                  <input type="range" name="lobRight" id="lobRight" />
+                  <p>215</p>
+                </div>
+                <label for="whipRight">WHIP</label>
+                <div class="input-predict">
+                  <input type="range" name="whipRight" id="whipRight" />
+                  <p>215</p>
+                </div>
+                <label for="obpRight">OBP</label>
+                <div class="input-predict">
+                  <input type="range" name="obpRight" id="obpRight" />
+                  <p>215</p>
+                </div>
+                <h3 class="predict-title">Velocity</h3>
+                <label for="slgRight">SLG</label>
+                <div class="input-predict">
+                  <input type="range" name="slgRight" id="slgRight" />
+                  <p>215</p>
+                </div>
+                <h3 class="predict-title">Total Spin</h3>
+                <label for="baRight">BA</label>
+                <div class="input-predict">
+                  <input type="range" name="baRight" id="baRight" />
+                  <p>215</p>
+                </div>
+                <h3 class="predict-title">Percentage</h3>
+                <label for="percentageRight">0</label>
+                <div class="input-predict">
+                  <input
+                    type="range"
+                    name="percentageRight"
+                    id="percentageRight"
+                  />
+                  <p>215</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button class="btnproceed" type="submit" id="proceedBtn">
+            Proceed
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</main>
+
+
+
+<script src="{% static 'js/stats.js' %}"></script>
+{% endblock %}

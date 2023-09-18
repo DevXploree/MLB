@@ -1,0 +1,480 @@
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300&family=Roboto2:wght@300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@600&family=Roboto:wght@100;300&display=swap");
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+  /* height: 90px; */
+  display: hidden;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.search {
+  display: flex;
+  align-items: center;
+  padding: 10px 100px;
+  justify-content: center;
+}
+
+.btnproceed {
+  display: block;
+  margin-bottom: 30px;
+  margin: 0 auto 20px;
+  width: 150px; /* Set the width of the button */
+  height: 40px; /* Set the height of the button */
+  font-size: 16px; /* Set the font size */
+  font-family: Arial, sans-serif; /* Set the font family */
+  color: white; /* Set the font color */
+  background-color: #0ab635; /* Set the background color of the button */
+  border: none; /* Remove the default button border */
+  border-radius: 5px; /* Add rounded corners to the button */
+}
+
+
+.search-bar {
+  width: 1021px;
+  height: 58px;
+  padding: 3px 50px;
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px;
+  font-family: "Montserrat";
+  font-weight: 400;
+  letter-spacing: 0.2px;
+  word-wrap: break-word;
+  font-size: 14px;
+  color: #fff;
+  border: 3px solid #232325;
+  background-color: #131314;
+}
+.search-bar:focus {
+  outline: none;
+}
+
+.searchbtn {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+.searchbtn img {
+  border: none;
+  height: 63px;
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
+  background: transparent;
+}
+
+.input-predict p {
+  color: white;
+  font-size: 14px;
+  font-family: "Roboto2";
+  background-color: #0ab635;
+  font-weight: 400;
+  margin: 5px auto; /* Center the element horizontally */
+  padding: 5px; /* Increase padding for a wider background */
+  width: auto; /* Allow the element to expand with its content */
+  line-height: 10px;
+  letter-spacing: 0.2px;
+  word-wrap: break-word;
+  text-align: center; /* Center the text horizontally */
+}
+
+.small-box p {
+  color: white;
+  font-size: 20px;
+  font-family: "Roboto2";
+  font-weight: 500;
+  line-height: 28px;
+  letter-spacing: 0.2px;
+  margin: 0px 15px;
+}
+
+.small-box small {
+  color: white;
+  font-size: 10px;
+  font-family: "Roboto2";
+  font-weight: 300;
+  line-height: 28px;
+  letter-spacing: 0.2px;
+}
+
+.parent-stat-box {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 50px;
+}
+
+.left-stat {
+  width: 65vw;
+  max-height: 600px;
+  overflow-y: scroll;
+  height: 700px;
+  margin-bottom: 50px;
+  border-radius: 15px;
+  margin: 0 10px;
+}
+
+.small-box {
+  display: flex;
+}
+
+.head {
+  background-color: #151517;
+  display: flex;
+  color: #fff;
+  justify-content: space-between;
+  padding: 15px 25px;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}
+
+.body {
+  background-color: #1d1d1f;
+  box-shadow: 0px 4px 20px 4px rgba(0, 0, 0, 0.09);
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+}
+
+.top-line {
+  padding: 20px 10px;
+}
+.top-line ul {
+  display: flex;
+  color: #fff;
+  list-style: none;
+  justify-content: space-around;
+  align-items: center;
+}
+.top-line ul li {
+  margin-left: 20px;
+}
+.separator {
+  margin-top: 12px;
+  width: 100%;
+  background-color: #232325;
+  height: 2px;
+}
+
+li button {
+  border: 0;
+  background: transparent;
+}
+
+li h2 {
+  color: white;
+  font-size: 20px;
+  font-family: "Roboto2";
+  font-weight: 400;
+  line-height: 28px;
+  letter-spacing: 0.2px;
+  word-wrap: break-word;
+}
+
+li small {
+  color: white;
+  font-size: 10px;
+  font-family: "Roboto2";
+  font-weight: 400;
+  line-height: 28px;
+  letter-spacing: 0.2px;
+  word-wrap: break-word;
+}
+
+.top-line ul li button {
+  background: #232325;
+  color: white;
+  font-size: 10px;
+  height: 35px;
+  font-weight: 400;
+  word-wrap: break-word;
+  width: 35px;
+  letter-spacing: 0.2px;
+  font-family: "Roboto2";
+  border-radius: 9999px;
+}
+
+.matches{
+  background-color: #1d1d1f;
+}
+
+.matches ul {
+  display: flex;
+  color: #fff;
+  letter-spacing: 0.2px;
+  word-wrap: break-word;
+  font-size: 12px;
+  font-weight: 400;
+  font-family: "Roboto2";
+  justify-content: space-between;
+  align-items: center;
+  list-style-type: none;
+  padding: 15px 20px;
+}
+.matches ul li {
+  text-align: center;
+  width: 150px;
+}
+
+.right-stat {
+  background-color: #1d1d1f;
+  margin-bottom: 50px;
+  border-radius: 15px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.right-head-ul {
+  display: flex;
+  list-style: none;
+  width: 558px;
+}
+.right-head-ul li button {
+  color: #fff !important;
+  font-size: larger;
+  padding: 0 40px;
+  height: 100%;
+  cursor: pointer;
+}
+.right-head-ul li button:focus {
+  background-color: #0ab635;
+}
+/* Add this to your CSS file */
+.hidden {
+  display: none;
+}
+/* Add this to your CSS file */
+#stats-content {
+  display: none;
+  color: white;
+}
+.predict {
+  display: none;
+  font-family: "Roboto2";
+  color: white;
+}
+
+h2 {
+  color: #fff;
+}
+
+.right-body {
+  display: flex;
+  justify-content: space-between;
+}
+
+.stats-content {
+  display: flex;
+  justify-content: space-between;
+}
+
+.logo-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Roboto2";
+  font-size: 15px;
+  font-weight: 400;
+  color: white;
+  line-height: 28px;
+  word-wrap: break-word;
+  padding: 15px 10px;
+  border: 3px solid #232325;
+}
+
+.score ul li {
+  display: flex;
+  padding: 10px;
+  margin-right: 10px;
+  align-items: center;
+  justify-content: space-between;
+}
+.stats {
+  font-family: "Roboto2";
+  font-weight: 400;
+  line-height: 28px;
+  font-size: 15px;
+  color: white;
+  word-wrap: break-word;
+  letter-spacing: 0.2px;
+  border: 3px solid #232325;
+  padding: 20px 30px;
+}
+
+.score {
+  margin-top: 10px;
+}
+
+.body-left,
+.body-right {
+  width: 50%;
+}
+
+.score-point-win,
+.score-point-lost {
+  font-size: large;
+}
+.score-point-lost {
+  background-color: #b60a0a;
+  padding: 6px;
+}
+.score-point-win {
+  background-color: #0ab635;
+  padding: 6px;
+}
+
+.results {
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+}
+
+.results ul {
+  display: grid;
+  list-style: none;
+  color: #fff;
+  font-family: "Roboto2";
+  border: 1px solid #232325;
+  grid-template-columns: repeat(4, 1fr);
+}
+.results ul li {
+  grid-column: span 1;
+  padding: 10px;
+  border: 1px solid #232325;
+}
+
+.datepicker-input {
+  opacity: 0;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
+.calendar-icon {
+  position: relative;
+}
+
+.fas.fa-calendar-alt {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 8px;
+  pointer-events: none; /* Prevent icon from blocking date input clicks */
+}
+
+/* Style for the input date */
+input[type="date"] {
+  /* Add your desired styling here, e.g., borders, padding, etc. */
+  border: 1px solid #ccc;
+  padding: 5px;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+/* Style for the date picker dropdown arrow */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  /* You can change the appearance of the date picker arrow here */
+  filter: invert(40%);
+  cursor: pointer;
+}
+
+/* Style for the date picker popup (in Chrome) */
+input[type="date"]::-webkit-calendar-picker-popup {
+  /* Add your desired styles for the date picker popup */
+  /* For example, you can set the background color, font, etc. */
+  background-color: #fff;
+  font-family: Arial, sans-serif;
+  color: #333;
+}
+
+.top-logo {
+  display: flex;
+  justify-content: center;
+}
+
+.predict-body {
+  display: flex;
+  justify-content: space-around;
+}
+
+.right-predict {
+  width: 50%;
+  margin: 50px 50px;
+}
+.left-predict {
+  width: 50%;
+  margin: 50px 50px;
+}
+
+.predict-title {
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 15px;
+  margin-top: 10px;
+}
+
+.input-predict {
+  display: flex;
+}
+
+.box-predict {
+  margin: 20px 0;
+  padding: 10px;
+}
+
+.header-stat {
+  display: flex;
+  color: white;
+  font-family: "Roboto";
+  font-weight: 400;
+  line-height: 28px;
+  letter-spacing: 0.2px;
+  word-wrap: break-word;
+  justify-content: space-between;
+  padding: 30px;
+}
+.detail-stat {
+  display: flex;
+  color: white;
+  font-size: 16px;
+  font-family: "Roboto";
+  font-weight: 400;
+  line-height: 28px;
+  letter-spacing: 0.2px;
+  word-wrap: break-word;
+  justify-content: space-between;
+  padding: 30px;
+}
+
+
+.click-me{
+  background-color: transparent;
+  border:none;
+}
+
+ul li input{
+  background-color: transparent;
+  display: inline-block;
+  color: white;
+  border: none;
+  outline: none;
+  padding: 0;
+  appearance: none;
+}
+ul li input:focus{
+  outline:none;
+}

@@ -1,0 +1,67 @@
+The overall goal is to create an app that enables a user to login, pick a game, see the most recent stats for each team playing in a single game that was selected, weigh each stat against each other, and become a predictive analysis tool. I personally love baseball. Tonight the Yanks and playing the Royals. I would probably weigh ERA and team batting averages heavily. The app should be able to pump out a mathematical representation of the selections of the variables that have been weighed by the user. The app should also suggest who the winner is going to be based upon the selections of the variables.
+
+- Build a web application using Python Flask or Django to provide real-time MLB data and statistics.
+- Ingest MLB data using the pybaseball library as an alternative to the MLB API.
+- Implement user registration and login functionality to allow users to create accounts and log in.
+- Design a calendar view to display all MLB games.
+- Enable users to select a specific game from the calendar view.
+- Display the most recent stats for each team (e.g., ERA for the starting pitcher, team batting average, homeruns) in two separate columns.
+- Allow users to weigh each variable's importance using a draggable component in the left-hand column.
+- Users have 100% weight available to distribute among the variables to reflect their predictions.
+- Implement a "Submit" button to process the weighted selections and calculate the odds of the game's outcome based on the user's chosen variables.
+- Present the calculated odds for each team winning the game based on the weighted variables selected by the user.
+- Convert the user's weighted selections into an "algorithm" or mathematical representation to allow users to share their predictions.
+- Provide a feature for users to log back in and review which of their selections were the most successful in past predictions.
+- Store user preferences and prediction history securely using a database (e.g., SQLite).
+
+Here are the variables I'm looking to have available for the user to weigh for this MVP and I believe they can be pulled from entitysport.com or through pybaseball which I found on Github:
+
+1. Run Differential (RD): The difference between the total runs scored by a team and the total runs allowed by the team.
+2. Earned Run Average (ERA): The average number of earned runs allowed by the team's pitchers per nine innings pitched.
+3. Fielding Independent Pitching (FIP): A measure of the team's pitching performance that focuses on events that the pitchers can control (walks, strikeouts, and home runs) while excluding factors influenced by defense.
+4. Left on Base Percentage (LOB%): The percentage of baserunners that the team's pitchers leave stranded on base.
+5. Walks and Hits per Innings Pitched (WHIP): The total number of walks and hits allowed by the team's pitchers per inning pitched.
+6. On-Base Percentage (OBP): The percentage of times the team's batters reach base safely (hits, walks, hit by pitch) relative to their total plate appearances.
+7. Slugging Percentage (SLG): A measure of the team's batters' power, calculated by total bases divided by at-bats.
+8. Offensive Wins Above Replacement (oWAR): A statistic that measures the team's position players' total offensive value compared to a replacement-level team.
+9. Batting Average (BA): The percentage of the team's at-bats that result in hits.
+10. Pitching Wins Above Replacement (pWAR): A statistic that measures the team's pitchers' total value compared to a replacement-level team.
+11. Batting Average on Balls in Play (BAA): The percentage of the team's at-bats that result in hits on balls hit into play (excluding home runs and strikeouts).
+12. Hits per Nine Innings Pitched (H/9): The average number of hits allowed by the team's pitchers per nine innings pitched.
+13. Saves: The number of games in which the team's relief pitchers successfully maintain a lead for the team.
+14. Stolen Bases (SB): The number of bases the team successfully steals without getting caught.
+15. Errors: The number of defensive mistakes made by the team resulting in the advancement of opposing runners.
+16. Fielding Percentage: The percentage of defensive plays the team successfully completes out of the total opportunities.
+
+These definitions focus on the overall team performance rather than individual player performance.
+
+When you start pulling info from the API or wherever you decide is best, you can add more variables than just the 16 I gave to you. People can always give them 0% weight. I saw some variables like "weather" and "home field advantage"....those would be cool.
+
+Question:
+Should I limit users to allocating a maximum of 100% weight for all variables combined, or should I permit users to assign up to 100% weight for each variable individually? What is the best approach to weighting these variables in my prediction app?
+
+Answer:
+Both approaches have their advantages and disadvantages, and the choice depends on the level of flexibility you want to provide to users and the specific goals of your prediction model. Here are the pros and cons of each approach:
+
+1. Limiting Users to 100% for All Variables:
+   - Pros: This approach ensures that users must distribute the total weight (100%) across all variables, encouraging careful consideration of the relative importance of each factor. It prevents users from disproportionately emphasizing a single variable.
+   - Cons: Some users may find this approach too restrictive, especially if they strongly believe one particular variable significantly influences game outcomes. It may limit their ability to create a highly personalized prediction model.
+
+2. Permitting Users to Assign Up to 100% for Each Variable:
+   - Pros: This approach grants users more freedom to emphasize specific variables based on their expertise or insights. It allows users to express their viewpoints and strategies for predicting game outcomes.
+   - Cons: Users may inadvertently assign too much weight to certain variables, leading to unbalanced or less reliable predictions. Without constraints, some users may not consider the overall distribution of weights carefully.
+
+Considering these factors, a hybrid approach might be ideal:
+- Allow users to allocate weights for each variable and display an optional reminder of the total weight assigned so far and how much remains. For example, if a user assigns 10% weight to ERA, the app could display a message indicating they have 90% remaining for other variables.
+- Give users the flexibility to modify weights until they reach a total weight of 100%. This empowers users to prioritize variables based on their knowledge while encouraging a balanced allocation of weights.
+
+By implementing a hybrid approach, you strike a balance between flexibility and guidance, enabling users to create personalized prediction models while being mindful of the overall distribution of weights. This approach can lead to more informed and accurate predictions while accommodating users' preferences and insights. Remember that the "best" way to weight the variables may vary among users, and offering flexibility while encouraging responsible use of the weighting feature is beneficial. Additionally, providing users with information about the importance and relevance of each variable can aid in their decision-making process when assigning weights.
+
+ I tend to lean towards Option 1 above after thinking about it.
+
+
+I think a User would love to be able to see their win percentage. I was talking to my baseball fan / math enthusiast buddy and he said it would be really cool to know what his percentage of wins was based on his self-created algorithms. Most people can't beat 52% win rate.
+
+And my buddy said 60% prediction rate is as high as he’s ever seen. That’s why it would be cool to see what you’re at (as the user)
+
+ I just want you to think that we're operating at the TEAM level. We want to predict which TEAM will win so we want to look at team-level variables. When I read about pybaseball, they talk a lot about Sabermetrics and Statcast -- A lot of the variables are PLAYER level. I don't care about PLAYER level variables, just TEAM. So like I was saying above, if you see any TEAM level variables, feel free to collect them and display them.

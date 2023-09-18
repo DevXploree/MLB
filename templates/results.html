@@ -1,0 +1,20 @@
+{% extends "base.html" %} {% load static %} {% block style %}
+<link rel="stylesheet" href="{% static 'css/stats.css' %}" />
+{% endblock %} {% block content %}
+
+<main id="main">
+  <div class="search">
+    <input type="text" class="search-bar" placeholder="Search" />
+    <button class="searchbtn">
+      <img src="{% static 'assets/search.png' %}" alt="" />
+    </button>
+  </div>
+
+  <!-- {% for stats in all_stats %}
+    <ul>{{stats.strikeouts}}</ul>
+  {% endfor %} -->
+  <h1>Your predicted data has beed saved kindly wait for the match to over!! Thanks</h1>
+</main>
+
+<script src="{% static 'js/stats.js' %}"></script>
+{% endblock %}
