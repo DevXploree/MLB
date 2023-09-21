@@ -1,0 +1,5 @@
+Step1: export DJANGO_SETTINGS_MODULE=djangoproject.settings (Only once per machine)
+
+Step2: DJANGO_SETTINGS_MODULE=djangoproject.settings celery -A 
+
+Step3: djangoproject worker --loglevel=info celery -A djangoproject beat --loglevel=info

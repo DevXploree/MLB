@@ -6,7 +6,7 @@ from django.contrib import messages
 import requests
 from bs4 import BeautifulSoup
 import re
-from .models import Stats
+from prediction.models import Stats
 from decimal import Decimal
 from django.shortcuts import HttpResponse
 from prediction.models import Prediction
@@ -91,8 +91,71 @@ def stats(request):
 
     return render(request, "stats.html", {"context_arr": context_arr, "team1": team1_db, "team2": team2_db})
 
+@login_required(login_url="home")
+def savePrediction(request):
+    if request.method == "POST":
+        #teams name
+        team1 = request.POST.get("team1")
+        team2 = request.POST.get("team2")
+        #Left
+        rdLeft = request.POST.get("rdLeft")
+        eraLeft = request.POST.get("eraLeft")
+        fipLeft = request.POST.get("fipLeft")
+        lobLeft = request.POST.get("lobLeft")
+        whipLeft = request.POST.get("whipLeft")
+        obpLeft = request.POST.get("obpLeft")
+        slgLeft = request.POST.get("slgLeft")
+        percentageLeft = request.POST.get("percentageLeft")
+        baLeft = request.POST.get("baLeft")
+        
+        #Right
+        rdRight = request.POST.get("rdRight")
+        eraRight = request.POST.get("eraRight")
+        fipRight = request.POST.get("fipRight")
+        lobRight = request.POST.get("lobRight")
+        whipRight = request.POST.get("whipRight")
+        obpRight = request.POST.get("obpRight")
+        slgRight = request.POST.get("slgRight")
+        baRight = request.POST.get("baRight")
+        percentageRight = request.POST.get("percentageRight")
+        
+       
+        if team1 != "" or team2 != "":
+            new_prediction = Prediction.objects.create(
+                user = request.user,
+                team1 = team1,
+                team2 = team2,
+                rdLeft = rdLeft,
+                eraLeft = eraLeft,
+                fipLeft = fipLeft,
+                lobLeft = lobLeft,
+                whipLeft = whipLeft,
+                obpLeft = obpLeft,
+                slgLeft = slgLeft,
+                percentageLeft =percentageLeft,
+                baLeft = baLeft,
+                #Right code
 
-def update_stats_data(request):
+                rdRight = rdRight,
+                eraRight = eraRight,
+                fipRight = fipRight,
+                lobRight = lobRight,
+                whipRight = whipRight,
+                obpRight = obpRight,
+                slgRight = slgRight,
+                baRight = baRight,
+                percentageRight = percentageRight
+            )
+            new_prediction.save()
+        else:
+            return HttpResponse("Please select a match")
+        
+        return HttpResponse("saved")
+    
+    
+    
+# VIEWS FOR CELERY: DON'T TOUCH THE CODE
+def update_stats_data():
     # URL and parsing logic...
     # Stroring the stats data in the database
     # URL of the webpage containing the table
@@ -252,66 +315,4 @@ def update_stats_data(request):
                 )
                 new_stats.save()
 
-    return HttpResponse("Update successful, kindly check the database")
-
-
-@login_required(login_url="home")
-def savePrediction(request):
-    if request.method == "POST":
-        #teams name
-        team1 = request.POST.get("team1")
-        team2 = request.POST.get("team2")
-        #Left
-        rdLeft = request.POST.get("rdLeft")
-        eraLeft = request.POST.get("eraLeft")
-        fipLeft = request.POST.get("fipLeft")
-        lobLeft = request.POST.get("lobLeft")
-        whipLeft = request.POST.get("whipLeft")
-        obpLeft = request.POST.get("obpLeft")
-        slgLeft = request.POST.get("slgLeft")
-        percentageLeft = request.POST.get("percentageLeft")
-        baLeft = request.POST.get("baLeft")
-        
-        #Right
-        rdRight = request.POST.get("rdRight")
-        eraRight = request.POST.get("eraRight")
-        fipRight = request.POST.get("fipRight")
-        lobRight = request.POST.get("lobRight")
-        whipRight = request.POST.get("whipRight")
-        obpRight = request.POST.get("obpRight")
-        slgRight = request.POST.get("slgRight")
-        baRight = request.POST.get("baRight")
-        percentageRight = request.POST.get("percentageRight")
-        
-       
-        if team1 is not "" or team2 is not "":
-            new_prediction = Prediction.objects.create(
-                user = request.user,
-                team1 = team1,
-                team2 = team2,
-                rdLeft = rdLeft,
-                eraLeft = eraLeft,
-                fipLeft = fipLeft,
-                lobLeft = lobLeft,
-                whipLeft = whipLeft,
-                obpLeft = obpLeft,
-                slgLeft = slgLeft,
-                percentageLeft =percentageLeft,
-                baLeft = baLeft,
-                #Right code
-
-                rdRight = rdRight,
-                eraRight = eraRight,
-                fipRight = fipRight,
-                lobRight = lobRight,
-                whipRight = whipRight,
-                obpRight = obpRight,
-                slgRight = slgRight,
-                baRight = baRight,
-                percentageRight = percentageRight
-            )
-            new_prediction.save()
-        else:
-            return HttpResponse("Please select a match")
-        
-        return HttpResponse("saved")  
+    return HttpResponse("Update successful, kindly check the database") 
